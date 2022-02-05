@@ -30,7 +30,7 @@ impl<T: 'static> ComponentArray<T> {
 
 	pub fn remove(&mut self, entity: Entity) {
 		self.next_index -= 1;
-		self.component_store.swap_remove(self.entity_index_map[&entity]);
+		// self.component_store.swap_remove(self.entity_index_map[&entity]);
 		
 		let removed_index = self.entity_index_map[&entity];
 
@@ -40,11 +40,11 @@ impl<T: 'static> ComponentArray<T> {
 	}
 	
 	pub fn get_mut(&mut self, entity: Entity) -> &mut T {
-		self.component_store.get_mut(self.next_index).unwrap()
+		self.component_store.get_mut(self.entity_index_map[&entity]).unwrap()
 	}
 
 	pub fn get_ref(&mut self, entity: Entity) -> &T {
-		self.component_store.get(self.next_index).unwrap()
+		self.component_store.get(self.entity_index_map[&entity]).unwrap()
 	}
 }
 
@@ -103,7 +103,7 @@ impl ComponentManager<'_> {
 	}
 
 	pub fn remove_component<T: 'static>(&mut self, entity: Entity) {
-		assert!(!self.component_array_index_map.contains_key(&TypeId::of::<T>()), "[COMPONENT] {} is not present / it was previously removed", type_name::<T>());
+		assert!(self.component_array_index_map.contains_key(&TypeId::of::<T>()), "[COMPONENT] {} is not present / it was previously removed", type_name::<T>());
 		
 		self.component_array.get_mut(self.component_array_index_map[&TypeId::of::<T>()]).unwrap().as_any_mut().downcast_mut::<ComponentArray<T>>().unwrap().remove(entity);
 	}
