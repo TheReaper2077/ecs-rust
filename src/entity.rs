@@ -31,7 +31,11 @@ impl EntityManager {
 	}
 
 	pub fn add_component<T: 'static>(&mut self, entity: Entity) {
-		self.component_entity_map.get_mut(&entity).unwrap().insert(TypeId::of::<T>());
+		self.add_component_by_type_id(entity, &TypeId::of::<T>());
+	}
+
+	pub fn add_component_by_type_id(&mut self, entity: Entity, component_type: &TypeId) {
+		self.component_entity_map.get_mut(&entity).unwrap().insert(*component_type);
 	}
 
 	pub fn remove_component<T: 'static>(&mut self, entity: Entity) {

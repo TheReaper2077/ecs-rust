@@ -121,6 +121,8 @@ impl ComponentManager<'_> {
 	}
 
 	pub fn get_component_type_id(&self, component_name: &str) -> TypeId {
+		assert!(self.component_name_id_map.contains_key(component_name), "[COMPONENT] {} is not registered", component_name);
+
 		self.component_name_id_map[component_name]
 	}
 

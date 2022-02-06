@@ -48,8 +48,21 @@ impl SystemManager<'_> {
 	}
 	
 	pub fn entity_changed<T: 'static>(&mut self, entity: Entity, entity_components: &HashSet<TypeId>) {
+		// for i in 0..self.system_components.len() {
+		// 	if self.system_components[i].contains(&TypeId::of::<T>()) {
+		// 		if self.system_components[i].is_subset(entity_components) {
+		// 			self.system_entities[i].insert(entity);
+		// 		} else {
+		// 			self.system_entities[i].remove(&entity);
+		// 		}
+		// 	}
+		// }
+		self.entity_changed_by_type_id(entity, entity_components, &TypeId::of::<T>());
+	}
+
+	pub fn entity_changed_by_type_id(&mut self, entity: Entity, entity_components: &HashSet<TypeId>, component_type: &TypeId) {
 		for i in 0..self.system_components.len() {
-			if self.system_components[i].contains(&TypeId::of::<T>()) {
+			if self.system_components[i].contains(component_type) {
 				if self.system_components[i].is_subset(entity_components) {
 					self.system_entities[i].insert(entity);
 				} else {
