@@ -4,8 +4,9 @@ pub(crate) mod archetype;
 pub(crate) mod registry;
 pub(crate) mod component;
 pub(crate) mod entity;
+pub mod system;
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct Pos {
     v: u32,
 }
@@ -28,7 +29,7 @@ fn main() {
     registry.add_component(entity, data);
     registry.add_component(entity, v_data);
 
-    println!("{:?}", registry.get_ref_component::<Pos>(entity));
-    println!("{:?}", registry.get_ref_component::<Vel>(entity));
-    
+    let x = registry.get_mut_component::<Pos>(entity);
+
+    println!("{:?}", registry.view::<(Vel, Pos)>());
 }

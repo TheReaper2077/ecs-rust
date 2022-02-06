@@ -1,10 +1,11 @@
-use std::{collections::HashMap, hash::Hash, any::type_name, ops::IndexMut};
+use std::{collections::{HashMap, HashSet}, hash::Hash, any::{type_name, TypeId}, ops::IndexMut};
 
 pub type Entity = usize;
 
 pub struct EntityManager {
 	next_entity: Entity,
 	available_entities: Vec<Entity>,
+	component_entity_map: HashMap<Entity, HashSet<TypeId>>,
 }
 
 impl EntityManager {
@@ -12,6 +13,7 @@ impl EntityManager {
 		EntityManager {
 			next_entity: 0,
 			available_entities: vec![],
+			component_entity_map: HashMap::new(),
 		}
 	}
 
@@ -24,10 +26,24 @@ impl EntityManager {
 			self.next_entity += 1;
 		}
 
+		self.component_entity_map.insert(entity, HashSet::new());
 		entity
+	}
+
+	pub fn add_component<T: 'static>(&mut self, entity: Entity) {
+		self.component_entity_map.get_mut(&entity).unwrap().insert(TypeId::of::<T>());
+	}
+
+	pub fn remove_component<T: 'static>(&mut self, entity: Entity) {
+		self.component_entity_map.get_mut(&entity).unwrap().remove(&TypeId::of::<T>());
+	}
+
+	pub fn get_entity_component_map(&mut self) -> &mut HashMap<Entity, HashSet<TypeId>> {
+		&mut self.component_entity_map
 	}
 
 	pub fn destroy_entity(&mut self, entity: Entity) {
 		self.available_entities.push(entity);
+		self.component_entity_map.remove(&entity);
 	}
 }

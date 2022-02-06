@@ -1,8 +1,11 @@
-use crate::{entity::{self, EntityManager, Entity}, component::ComponentManager};
+use std::{hash, collections::{BTreeSet, HashSet}};
+
+use crate::{entity::{self, EntityManager, Entity}, component::ComponentManager, system::SystemManager};
 
 pub struct Registry<'a> {
 	entity_manager: EntityManager,
 	component_manager: ComponentManager<'a>,
+	system_manager: SystemManager<'a>,
 }
 
 
@@ -11,6 +14,7 @@ impl Registry<'_> {
 		Registry {
 			entity_manager: EntityManager::new(),
 			component_manager: ComponentManager::new(),
+			system_manager: SystemManager::new(),
 		}
 	}
 
@@ -19,7 +23,9 @@ impl Registry<'_> {
 	}
 
 	pub fn destroy_entity(&mut self, entity: Entity) {
-		self.entity_manager.destroy_entity(entity)
+		self.entity_manager.destroy_entity(entity);
+		self.component_manager.destroy_entity(entity);
+		self.system_manager.destroy_entity(entity);
 	}
 
 	pub fn register_component<T: 'static>(&mut self) {
@@ -27,11 +33,15 @@ impl Registry<'_> {
 	}
 	
 	pub fn add_component<T: 'static>(&mut self, entity: Entity, data: T) {
-		self.component_manager.add_component(entity, data);
+		self.entity_manager.add_component::<T>(entity);
+		self.component_manager.add_component::<T>(entity, data);
+		self.system_manager.add_component::<T>(entity, &mut self.entity_manager);
 	}
 
 	pub fn remove_component<T: 'static>(&mut self, entity: Entity) {
+		self.entity_manager.remove_component::<T>(entity);
 		self.component_manager.remove_component::<T>(entity);
+		self.system_manager.remove_component::<T>(entity);
 	}
 
 	pub fn get_mut_component<T: 'static>(&mut self, entity: Entity) -> &mut T{
@@ -40,5 +50,9 @@ impl Registry<'_> {
 
 	pub fn get_ref_component<T: 'static>(&mut self, entity: Entity) -> &T {
 		self.component_manager.get_ref_component::<T>(entity)
+	}
+
+	pub fn view<T: 'static>(&mut self) ->  &HashSet<Entity> {
+		self.system_manager.view::<T>(&self.component_manager, &mut self.entity_manager)
 	}
 }
