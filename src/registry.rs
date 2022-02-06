@@ -35,13 +35,13 @@ impl Registry<'_> {
 	pub fn add_component<T: 'static>(&mut self, entity: Entity, data: T) {
 		self.entity_manager.add_component::<T>(entity);
 		self.component_manager.add_component::<T>(entity, data);
-		self.system_manager.add_component::<T>(entity, &mut self.entity_manager);
+		self.system_manager.entity_changed::<T>(entity, self.entity_manager.get_entity_components(entity));
 	}
 
 	pub fn remove_component<T: 'static>(&mut self, entity: Entity) {
 		self.entity_manager.remove_component::<T>(entity);
 		self.component_manager.remove_component::<T>(entity);
-		self.system_manager.remove_component::<T>(entity);
+		self.system_manager.entity_changed::<T>(entity, self.entity_manager.get_entity_components(entity));
 	}
 
 	pub fn get_mut_component<T: 'static>(&mut self, entity: Entity) -> &mut T{

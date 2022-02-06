@@ -42,6 +42,10 @@ impl EntityManager {
 		&mut self.component_entity_map
 	}
 
+	pub fn get_entity_components(&mut self, entity: Entity) -> &HashSet<TypeId> {
+		self.component_entity_map.get(&entity).unwrap()
+	}
+
 	pub fn destroy_entity(&mut self, entity: Entity) {
 		self.available_entities.push(entity);
 		self.component_entity_map.remove(&entity);
