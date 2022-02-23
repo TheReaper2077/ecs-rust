@@ -1,45 +1,83 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "lldb",
+			"type": "cppvsdbg",
 			"request": "launch",
-			"name": "Debug executable 'ECS'",
-			"cargo": {
-				"args": [
-					"build",
-					"--bin=ECS",
-					"--package=ECS"
-				],
-				"filter": {
-					"name": "ECS",
-					"kind": "bin"
-				}
-			},
+			"name": "run ECS",
+			"program": "${workspaceFolder}\\target\\debug\\ECS.exe",
 			"args": [],
-			"cwd": "${workspaceFolder}"
-		},
-		{
-			"type": "lldb",
-			"request": "launch",
-			"name": "Debug unit tests in executable 'ECS'",
-			"cargo": {
-				"args": [
-					"test",
-					"--no-run",
-					"--bin=ECS",
-					"--package=ECS"
-				],
-				"filter": {
-					"name": "ECS",
-					"kind": "bin"
-				}
-			},
-			"args": [],
-			"cwd": "${workspaceFolder}"
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"sourceFileMap": {},
+			"env": {
+				"RUST_BACKTRACE": "short",
+				"ALLUSERSPROFILE": "C:\\ProgramData",
+				"AMDPROFILERPATH": "C:\\Program Files\\AMD\\AMDuProf\\bin",
+				"APPDATA": "C:\\Users\\krishnadev\\AppData\\Roaming",
+				"APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+				"ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+				"CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_7352_GAEHTYLMVSGLWNNX",
+				"CommonProgramFiles": "C:\\Program Files\\Common Files",
+				"CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+				"CommonProgramW6432": "C:\\Program Files\\Common Files",
+				"COMPUTERNAME": "LP000007029917",
+				"ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+				"DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+				"ELECTRON_RUN_AS_NODE": "1",
+				"FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+				"FPS_BROWSER_USER_PROFILE_STRING": "Default",
+				"GOPATH": "C:\\Users\\krishnadev\\go",
+				"HOMEDRIVE": "C:",
+				"HOMEPATH": "\\Users\\krishnadev",
+				"IntelliJ IDEA Community Edition": "C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.2.3\\bin;",
+				"JAVA_HOME": "C:\\Program Files\\Java\\jdk-17.0.1",
+				"LDMS_LOCAL_DIR": "C:\\Program Files (x86)\\LANDesk\\LDClient\\Data",
+				"LOCALAPPDATA": "C:\\Users\\krishnadev\\AppData\\Local",
+				"LOGONSERVER": "\\\\LP000007029917",
+				"NUMBER_OF_PROCESSORS": "8",
+				"OneDrive": "C:\\Users\\krishnadev\\OneDrive",
+				"OneDriveConsumer": "C:\\Users\\krishnadev\\OneDrive",
+				"ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+				"OS": "Windows_NT",
+				"Path": "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files\\Python38\\Scripts\\;C:\\Program Files\\Python38\\;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\Microsoft VS Code\\bin;C:\\Program Files\\AMD\\AMDuProf\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Go\\bin;C:\\Program Files\\dotnet\\;C:\\Program Files\\Microsoft VS Code Insiders\\bin;C:\\Program Files\\LLVM\\bin;C:\\Users\\krishnadev\\.cargo\\bin;C:\\Users\\krishnadev\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\krishnadev\\AppData\\Roaming\\npm;C:\\Program Files (x86)\\Google\\Chrome\\Application;C:\\Program Files\\Python38;C:\\Program Files\\Python38\\Scripts;C:\\Youtube-dl;C:\\Users\\krishnadev\\go\\bin;C:\\Program Files\\Mozilla Firefox;C:\\Users\\krishnadev\\AppData\\Local\\bin\\NASM;C:\\MinGW\\bin;C:\\Users\\krishnadev\\AppData\\Roaming\\Python\\Python38\\Scripts;C:\\Users\\krishnadev\\spicetify-cli;C:\\Program Files\\JetBrains\\IntelliJ IDEA Community Edition 2021.2.3\\bin;;C:\\msys64\\mingw64\\bin;C:\\Program Files\\MKVToolNix;C:\\Program Files\\CMake\\bin;C:\\Users\\krishnadev\\.dotnet\\tools;C:\\Users\\krishnadev\\AppData\\Roaming\\Code - Insiders\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\13.0.0\\clangd_13.0.0\\bin;C:\\msys64\\usr\\bin;",
+				"PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW",
+				"PROCESSOR_ARCHITECTURE": "AMD64",
+				"PROCESSOR_IDENTIFIER": "AMD64 Family 23 Model 17 Stepping 0, AuthenticAMD",
+				"PROCESSOR_LEVEL": "23",
+				"PROCESSOR_REVISION": "1100",
+				"ProgramData": "C:\\ProgramData",
+				"ProgramFiles": "C:\\Program Files",
+				"ProgramFiles(x86)": "C:\\Program Files (x86)",
+				"ProgramW6432": "C:\\Program Files",
+				"PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+				"PUBLIC": "C:\\Users\\Public",
+				"SESSIONNAME": "Console",
+				"SPOTIPY_CLIENT_ID": "f908c383f9c04969af52fafde771fc4e",
+				"SPOTIPY_CLIENT_SECRET": "b713b63ecfaa4d63be49fe8a45996367",
+				"SPOTIPY_REDIRECT_URI": "http://localhost:8888/callback/",
+				"STTASKFOLDERPATH": "Ivanti\\PatchSDK\\Deployments",
+				"SystemDrive": "C:",
+				"SystemRoot": "C:\\WINDOWS",
+				"TEMP": "C:\\Users\\KRISHN~1\\AppData\\Local\\Temp",
+				"TMP": "C:\\Users\\KRISHN~1\\AppData\\Local\\Temp",
+				"USERDOMAIN": "LP000007029917",
+				"USERDOMAIN_ROAMINGPROFILE": "LP000007029917",
+				"USERNAME": "krishnadev",
+				"USERPROFILE": "C:\\Users\\krishnadev",
+				"VSCODE_AMD_ENTRYPOINT": "vs/workbench/api/node/extensionHostProcess",
+				"VSCODE_CODE_CACHE_PATH": "C:\\Users\\krishnadev\\AppData\\Roaming\\Code - Insiders\\CachedData\\52e65499654de7525e30df3a8228b69320796bf5",
+				"VSCODE_CWD": "C:\\Program Files\\Microsoft VS Code Insiders",
+				"VSCODE_HANDLES_UNCAUGHT_ERRORS": "true",
+				"VSCODE_IPC_HOOK": "\\\\.\\pipe\\6d98b5baee01418175faae104476b1b9-1.65.0-insider-main-sock",
+				"VSCODE_IPC_HOOK_EXTHOST": "\\\\.\\pipe\\vscode-ipc-cfba56bb-3561-43dc-aba9-fa957c98d8b4-sock",
+				"VSCODE_LOG_NATIVE": "false",
+				"VSCODE_LOG_STACK": "true",
+				"VSCODE_NLS_CONFIG": "{\"locale\":\"en-us\",\"availableLanguages\":{},\"_languagePackSupport\":true}",
+				"VSCODE_PID": "7352",
+				"VSCODE_PIPE_LOGGING": "true",
+				"VSCODE_VERBOSE_LOGGING": "true",
+				"windir": "C:\\WINDOWS"
+			}
 		}
 	]
 }

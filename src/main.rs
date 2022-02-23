@@ -21,7 +21,23 @@ fn main() {
 	registry.register_component::<Pos>();
 	registry.register_component::<Vel>();
 	
-	// registry.create_entity::<(Pos, Vel)>();
+	registry.create_entity_explicit::<(Pos, Vel)>();
+	
+    // let entity = registry.create_entity();
+
+    // registry.add_component(entity, Pos{v:0});
+    // registry.add_component(entity, Vel{});
+
+    // let x = registry.get_mut_component::<Pos>(entity);
+    
+    // let a_entity = registry.create_entity();
+    
+    // registry.add_component(a_entity, Pos{v:110});
+    // registry.add_component(a_entity, Vel{});    
+    
+    // println!("{:?}", registry.view::<(Vel, Pos)>());
+    
+    // registry.remove_component::<Pos>(entity);
 
 	println!("{:?}", registry.view::<Vel>());
 }

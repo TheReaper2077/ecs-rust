@@ -1,6 +1,6 @@
 use std::{collections::{BTreeSet, HashSet, HashMap}, any::{TypeId, type_name}, hash, slice::SliceIndex, ops::Sub};
 
-use crate::{entity::{Entity, EntityManager}, component::ComponentManager};
+use super::{entity::{Entity, EntityManager}, component::ComponentManager};
 
 pub struct SystemManager<'a> {
 	system_entities: Vec<HashSet<Entity>>,

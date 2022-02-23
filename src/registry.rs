@@ -27,17 +27,17 @@ impl Registry<'_> {
 		self.entity_manager.create_entity()
 	}
 
-	// pub fn create_entity_explicit<T: 'static>(&mut self) -> Entity {
-	//     let entity = self.entity_manager.create_entity();
+	pub fn create_entity_explicit<T: 'static>(&mut self) -> Entity {
+	    let entity = self.entity_manager.create_entity();
 
-	// 	for i in type_name::<T>().replace("(", "").replace(")", "").replace(",", "").split(" ") {
-	// 		let component_type = self.component_manager.get_component_type_id(i);
-	// 		self.entity_manager.add_component_by_type_id(entity, &component_type);
-	// 		self.system_manager.entity_changed_by_type_id(entity, self.entity_manager.get_entity_components(entity), &component_type);
-	// 	}
+		for i in type_name::<T>().replace("(", "").replace(")", "").replace(",", "").split(" ") {
+			let component_type = self.component_manager.get_component_type_id(i);
+			self.entity_manager.add_component_by_type_id(entity, &component_type);
+			self.system_manager.entity_changed_by_type_id(entity, self.entity_manager.get_entity_components(entity), &component_type);
+		}
 
-	// 	entity
-	// }
+		entity
+	}
 
 	pub fn destroy_entity(&mut self, entity: Entity) {
 		self.entity_manager.destroy_entity(entity);
