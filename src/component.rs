@@ -22,7 +22,11 @@ impl<T: 'static> ComponentArray<T> {
 	}
 
 	pub fn add(&mut self, entity: Entity, data: T) {
-		self.component_store.push(data);
+		if !self.entity_index_map.contains_key(&entity) {
+			self.component_store.push(data);
+		} else {
+			self.component_store[self.entity_index_map[&entity]] = data;
+		}
 		self.entity_index_map.insert(entity, self.next_index);
 		self.index_entity_map.insert(self.next_index, entity);
 		self.next_index += 1;
