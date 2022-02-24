@@ -1,3 +1,3 @@
 # ecs-rust
 
-A Simple ECS Made in Rust
+A Simple Entity Component System for Rust
